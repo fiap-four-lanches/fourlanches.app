@@ -1,12 +1,15 @@
-name: ci
+name: Docker Image Build
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-    paths: ["src/main/**"]
+  workflow_run:
+    workflows: [ Java CI with Gradle - Push ]
+    types:
+      - completed
 jobs:
   docker:
+    name: build-docker
+
     runs-on: ubuntu-latest
     steps:
       -
